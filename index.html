@@ -61,6 +61,8 @@
     .repo-card{background:rgba(255,255,255,.05);border-radius:20px;padding:22px;border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(10px);transition:transform .2s ease,background .2s ease}
     .repo-card:hover{transform:translateY(-6px);background:rgba(255,255,255,.08)}
     .topic-badge{background:rgba(0,255,136,.18);color:#00ff88;border:1px solid rgba(0,255,136,.28);padding:3px 10px;border-radius:999px;font-size:.8rem}
+    .repo-link{display:inline-block;margin-top:10px;color:#ff5252;font-weight:600;text-decoration:none;transition:color .3s ease}
+    .repo-link:hover{color:#ff7b7b;text-decoration:underline}
     @media(max-width:768px){.nav-links{display:none}.about-content{grid-template-columns:1fr;text-align:center}.projects-grid{grid-template-columns:1fr}.contact-links{flex-direction:column;align-items:center}.hero h1{font-size:3rem}.section h2{font-size:2rem}}
     .fade-in{opacity:0;transform:translateY(30px);transition:all .6s ease}
     .fade-in.visible{opacity:1;transform:translateY(0)}
@@ -177,21 +179,26 @@
         <h3>Monkeypox Disease Detection</h3>
         <p>High-precision CNN for medical image recognition; 99% accuracy on 10k+ images.</p>
         <div class="tech-tags"><span class="tech-tag">Python</span><span class="tech-tag">OpenCV</span><span class="tech-tag">CNN</span><span class="tech-tag">sklearn</span></div>
+        <a href="https://github.com/Sathwikchava18/Monkeypox-Disease-Detection" target="_blank" class="repo-link">Repository Link</a>
       </div>
+
       <div class="project-card">
         <h3>Codebase Q&A Assistant</h3>
         <p>RAG-powered code search; +33% retrieval precision; &lt;2s latency.</p>
-        <div class="tech-tags"><span class="tech-tag">Python</span><span class="tech-tag">Llama-2</span><span class="tech-tag">FAISS</span><span class="tech-tag">LangChain</span></div>
+        <div class="tech-tags"><span class="tech-tag">Python</span><span class="tech-tag">Llama-2</span><span class="tech-tag">FAISS</span><span class="tech-tag">LangChain</span><span class="tech-tag">Streamlit</span></div>
+        <a href="https://github.com/Sathwikchava18/Codebase-QA-Assistant" target="_blank" class="repo-link">Repository Link</a>
       </div>
+
       <div class="project-card">
         <h3>E-commerce Recommendation Chatbot</h3>
         <p>Semantic search over 50k+ products; +22% conversion; +35% engagement.</p>
-        <div class="tech-tags"><span class="tech-tag">Next.js</span><span class="tech-tag">FastAPI</span><span class="tech-tag">Pinecone</span><span class="tech-tag">AWS</span></div>
+        <div class="tech-tags"><span class="tech-tag">Python</span><span class="tech-tag">Next.js</span><span class="tech-tag">FastAPI</span><span class="tech-tag">Pinecone</span><span class="tech-tag">AWS</span></div>
+        <a href="https://github.com/Sathwikchava18/Ecommerce-Recommendation-Chatbot" target="_blank" class="repo-link">Repository Link</a>
       </div>
     </div>
   </section>
 
-  <!-- Repositories -->
+  <!-- Auto GitHub Repositories -->
   <section id="repos" class="section fade-in">
     <h2>Repositories</h2>
     <div style="max-width:1200px;margin:0 auto;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center">
@@ -338,4 +345,3 @@
   </script>
 </body>
 </html>
-
