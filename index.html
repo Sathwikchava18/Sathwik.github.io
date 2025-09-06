@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sai Sathwik Chava - Portfolio</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#0a0a0a;color:#fff;overflow-x:hidden;line-height:1.6}
 
-    /* Navigation */
+    /* Nav */
     nav{position:fixed;top:0;left:0;right:0;padding:20px 40px;backdrop-filter:blur(10px);background:rgba(10,10,10,.8);z-index:1000;transition:all .3s ease}
     nav.scrolled{background:rgba(10,10,10,.95);border-bottom:1px solid rgba(255,255,255,.1)}
     .nav-container{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}
@@ -32,24 +32,35 @@
     .section{padding:100px 20px;max-width:1200px;margin:0 auto}
     .section h2{font-size:3rem;margin-bottom:50px;text-align:center;background:linear-gradient(45deg,#00ff88,#0088ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-    /* Projects Grid */
+    /* Project cards */
     .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:30px;margin-top:50px}
-    .project-card{background:rgba(255,255,255,.05);border-radius:20px;padding:30px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);transition:all .3s ease;position:relative;overflow:hidden}
+    .project-card{background:rgba(255,255,255,.05);border-radius:20px;padding:30px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);transition:all .3s ease}
     .project-card:hover{transform:translateY(-10px);background:rgba(255,255,255,.08)}
     .project-card h3{color:#00ff88;margin-bottom:15px;font-size:1.4rem}
-    .project-card p{color:rgba(255,255,255,.8);margin-bottom:20px;line-height:1.6}
+    .project-card p{color:rgba(255,255,255,.85);margin-bottom:18px}
 
-    /* Tech tags — pill style */
-    .tech-tags{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
-    .tech-tag{display:inline-flex;align-items:center;padding:8px 14px;border-radius:999px;background:rgba(0,255,136,0.14);border:1px solid rgba(0,255,136,0.35);color:#00ff88;font-weight:600;font-size:14px;line-height:1;letter-spacing:.2px;box-shadow:inset 0 0 0 1px rgba(0,255,136,0.15),0 2px 10px rgba(0,0,0,0.15);transition:transform .15s ease, background .2s ease, border-color .2s ease}
-    .tech-tag:hover{transform:translateY(-1px);background:rgba(0,255,136,0.22);border-color:rgba(0,255,136,0.6)}
+    /* ✔ Pills like your screenshot (used in projects + skills) */
+    .tech-tags,.skill-items{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
+    .tech-tag,.skill-item{
+      display:inline-flex;align-items:center;padding:8px 14px;border-radius:999px;
+      background:rgba(0,255,136,0.14);border:1px solid rgba(0,255,136,0.35);
+      color:#00ff88;font-weight:600;font-size:14px;line-height:1;letter-spacing:.2px;
+      box-shadow:inset 0 0 0 1px rgba(0,255,136,0.15),0 2px 10px rgba(0,0,0,0.15);
+      transition:transform .15s ease, background .2s ease, border-color .2s ease
+    }
+    .tech-tag:hover,.skill-item:hover{transform:translateY(-1px);background:rgba(0,255,136,0.22);border-color:rgba(0,255,136,0.6)}
 
-    /* Repo link */
-    .repo-link{display:inline-block;margin-top:15px;color:#ff5252;font-weight:600;text-decoration:none;transition:color .3s ease}
+    /* Red repo button */
+    .repo-link{display:inline-block;margin-top:12px;color:#ff5252;font-weight:700;text-decoration:none}
     .repo-link:hover{color:#ff7b7b;text-decoration:underline}
 
+    /* Skills section cards */
+    .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;margin-top:40px}
+    .skill-category{background:rgba(255,255,255,.05);border-radius:15px;padding:25px;border:1px solid rgba(255,255,255,.1)}
+    .skill-category h3{color:#0088ff;margin-bottom:14px}
+
     /* Mobile */
-    @media(max-width:768px){.projects-grid{grid-template-columns:1fr}}
+    @media (max-width:768px){.projects-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -58,8 +69,8 @@
       <div class="logo">SC</div>
       <ul class="nav-links">
         <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
       </ul>
     </div>
   </nav>
@@ -69,45 +80,29 @@
     <div class="hero-content">
       <h1>Sai Sathwik Chava</h1>
       <p>Full-Stack Developer & ML Engineer</p>
-      <a href="#about" class="cta-button">Explore My Work</a>
+      <a href="#projects" class="cta-button">Explore My Work</a>
     </div>
   </section>
 
-  <section id="about" class="section">
-    <h2>About Me</h2>
-    <p style="text-align:center;max-width:800px;margin:0 auto;color:rgba(255,255,255,.8)">
-      I’m a Full-Stack and AI/ML Developer with a passion for creating innovative, scalable, and user-centric applications.
-      Currently pursuing a Master's in Computer and Information Sciences at the University of Florida.
-    </p>
-  </section>
-
+  <!-- Featured Projects -->
   <section id="projects" class="section">
     <h2>Featured Projects</h2>
     <div class="projects-grid">
-
-      <!-- Project 1 -->
       <div class="project-card">
         <h3>Monkeypox Disease Detection</h3>
-        <p>
-          Architected CNN models for high-precision medical image recognition, achieving 99% accuracy on 10,000+ images.
-          Reduced diagnosis time from 15 to 12 minutes and accelerated disease identification by 20%.
-        </p>
+        <p>Architected CNN models for high-precision medical image recognition, achieving 99% accuracy on 10,000+ images. Reduced diagnosis time from 15 to 12 minutes and accelerated disease identification by 20%.</p>
         <div class="tech-tags">
           <span class="tech-tag">Python</span>
           <span class="tech-tag">OpenCV</span>
           <span class="tech-tag">CNN</span>
           <span class="tech-tag">sklearn</span>
         </div>
-        <a href="https://github.com/Sathwikchava18/Monkeypox-Disease-Detection" target="_blank" class="repo-link">Repository Link</a>
+        <a class="repo-link" target="_blank" href="https://github.com/Sathwikchava18/Monkeypox-Disease-Detection">Repository Link</a>
       </div>
 
-      <!-- Project 2 -->
       <div class="project-card">
         <h3>Codebase Q&A Assistant</h3>
-        <p>
-          Engineered a RAG-powered assistant for querying large code repositories. Enhanced retrieval precision by 33%
-          and reduced developer onboarding time by 40%. Handles 100+ queries daily with &lt;2s latency.
-        </p>
+        <p>Engineered a RAG-powered assistant for querying large code repositories. Enhanced retrieval precision by 33% and reduced developer onboarding time by 40%. Handles 100+ queries daily with &lt;2s latency.</p>
         <div class="tech-tags">
           <span class="tech-tag">Python</span>
           <span class="tech-tag">Llama-2</span>
@@ -115,16 +110,12 @@
           <span class="tech-tag">LangChain</span>
           <span class="tech-tag">Streamlit</span>
         </div>
-        <a href="https://github.com/Sathwikchava18/Codebase-QA-Assistant" target="_blank" class="repo-link">Repository Link</a>
+        <a class="repo-link" target="_blank" href="https://github.com/Sathwikchava18/Codebase-QA-Assistant">Repository Link</a>
       </div>
 
-      <!-- Project 3 -->
       <div class="project-card">
         <h3>E-commerce Recommendation Chatbot</h3>
-        <p>
-          Built an AI shopping assistant with semantic search over 50,000+ products. Improved conversion rates by 22%
-          and engagement time by 35% through personalized recommendations using vector embeddings.
-        </p>
+        <p>Built an AI shopping assistant with semantic search over 50,000+ products. Improved conversion rates by 22% and engagement time by 35% through personalized recommendations using vector embeddings.</p>
         <div class="tech-tags">
           <span class="tech-tag">Python</span>
           <span class="tech-tag">Next.js</span>
@@ -132,10 +123,48 @@
           <span class="tech-tag">Pinecone</span>
           <span class="tech-tag">AWS</span>
         </div>
-        <a href="https://github.com/Sathwikchava18/Ecommerce-Recommendation-Chatbot" target="_blank" class="repo-link">Repository Link</a>
+        <a class="repo-link" target="_blank" href="https://github.com/Sathwikchava18/Ecommerce-Recommendation-Chatbot">Repository Link</a>
       </div>
+    </div>
+  </section>
 
+  <!-- Skills -->
+  <section id="skills" class="section">
+    <h2>Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <h3>Programming Languages</h3>
+        <div class="skill-items">
+          <span class="skill-item">Java</span><span class="skill-item">Python</span><span class="skill-item">JavaScript</span>
+          <span class="skill-item">C/C++</span><span class="skill-item">Go</span><span class="skill-item">Kotlin</span>
+          <span class="skill-item">C#</span><span class="skill-item">SQL</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3>Frameworks & Libraries</h3>
+        <div class="skill-items">
+          <span class="skill-item">React</span><span class="skill-item">Node.js</span><span class="skill-item">Spring Boot</span>
+          <span class="skill-item">Angular</span><span class="skill-item">Vue</span><span class="skill-item">TensorFlow</span>
+          <span class="skill-item">PyTorch</span><span class="skill-item">LangChain</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3>Platforms & Tools</h3>
+        <div class="skill-items">
+          <span class="skill-item">AWS</span><span class="skill-item">Docker</span><span class="skill-item">Kubernetes</span>
+          <span class="skill-item">PostgreSQL</span><span class="skill-item">MongoDB</span><span class="skill-item">Git</span><span class="skill-item">Linux</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3>Specializations</h3>
+        <div class="skill-items">
+          <span class="skill-item">Full-Stack Development</span><span class="skill-item">Machine Learning</span>
+          <span class="skill-item">GenAI & LLMs</span><span class="skill-item">Distributed Systems</span>
+          <span class="skill-item">RESTful APIs</span><span class="skill-item">Data Analysis</span>
+        </div>
+      </div>
     </div>
   </section>
 </body>
 </html>
+
