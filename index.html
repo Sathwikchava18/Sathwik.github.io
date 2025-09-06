@@ -8,6 +8,10 @@
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#0a0a0a;color:#fff;overflow-x:hidden;line-height:1.6}
 
+    /* Custom cursor */
+    .cursor{position:fixed;width:20px;height:20px;background:rgba(255,255,255,.8);border-radius:50%;pointer-events:none;z-index:9999;transition:transform .1s ease;mix-blend-mode:difference}
+    .cursor-trail{position:fixed;width:4px;height:4px;background:#00ff88;border-radius:50%;pointer-events:none;z-index:9998}
+
     /* Nav */
     nav{position:fixed;top:0;left:0;right:0;padding:20px 40px;backdrop-filter:blur(10px);background:rgba(10,10,10,.8);z-index:1000;transition:all .3s ease}
     nav.scrolled{background:rgba(10,10,10,.95);border-bottom:1px solid rgba(255,255,255,.1)}
@@ -21,10 +25,12 @@
 
     /* Hero */
     .hero{height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-    .hero-bg{position:absolute;inset:0;background:radial-gradient(circle at 30% 70%,rgba(0,255,136,.1) 0%,transparent 50%),radial-gradient(circle at 70% 30%,rgba(0,136,255,.1) 0%,transparent 50%)}
+    .hero-bg{position:absolute;inset:0;background:radial-gradient(circle at 30% 70%,rgba(0,255,136,.1) 0%,transparent 50%),radial-gradient(circle at 70% 30%,rgba(0,136,255,.1) 0%,transparent 50%);animation:float 20s ease-in-out infinite}
+    @keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-20px) rotate(1deg)}}
     .hero-content{text-align:center;z-index:2;max-width:800px;padding:0 20px}
-    .hero h1{font-size:clamp(3rem,8vw,6rem);font-weight:800;margin-bottom:20px;background:linear-gradient(45deg,#fff,#00ff88,#0088ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .hero p{font-size:1.3rem;color:rgba(255,255,255,.8);margin-bottom:30px}
+    .hero h1{font-size:clamp(3rem,8vw,6rem);font-weight:800;margin-bottom:20px;background:linear-gradient(45deg,#fff,#00ff88,#0088ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:textShine 3s ease-in-out infinite;background-size:200% 200%}
+    @keyframes textShine{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+    .hero p{font-size:1.3rem;color:rgba(255,255,255,.85);margin-bottom:30px}
     .cta-button{display:inline-block;padding:15px 35px;background:linear-gradient(45deg,#00ff88,#0088ff);color:#000;text-decoration:none;border-radius:50px;font-weight:600;transition:all .3s ease}
     .cta-button:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,255,136,.3)}
 
@@ -32,14 +38,21 @@
     .section{padding:100px 20px;max-width:1200px;margin:0 auto}
     .section h2{font-size:3rem;margin-bottom:50px;text-align:center;background:linear-gradient(45deg,#00ff88,#0088ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-    /* Project cards */
+    /* About */
+    .about-content{display:grid;grid-template-columns:1fr 2fr;gap:60px;align-items:center}
+    .about-text{font-size:1.1rem;color:rgba(255,255,255,.85);line-height:1.8}
+    .about-text h3{color:#00ff88;margin-bottom:15px;font-size:1.5rem}
+
+    /* Projects */
     .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:30px;margin-top:50px}
-    .project-card{background:rgba(255,255,255,.05);border-radius:20px;padding:30px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);transition:all .3s ease}
+    .project-card{background:rgba(255,255,255,.05);border-radius:20px;padding:30px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);transition:all .3s ease;position:relative;overflow:hidden}
+    .project-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,#00ff88,#0088ff);transform:translateX(-100%);transition:transform .3s ease}
+    .project-card:hover::before{transform:translateX(0)}
     .project-card:hover{transform:translateY(-10px);background:rgba(255,255,255,.08)}
     .project-card h3{color:#00ff88;margin-bottom:15px;font-size:1.4rem}
     .project-card p{color:rgba(255,255,255,.85);margin-bottom:18px}
 
-    /* ✔ Pills like your screenshot (used in projects + skills) */
+    /* ✔ Pills like your screenshot (projects + skills) */
     .tech-tags,.skill-items{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
     .tech-tag,.skill-item{
       display:inline-flex;align-items:center;padding:8px 14px;border-radius:999px;
@@ -50,7 +63,7 @@
     }
     .tech-tag:hover,.skill-item:hover{transform:translateY(-1px);background:rgba(0,255,136,0.22);border-color:rgba(0,255,136,0.6)}
 
-    /* Red repo button */
+    /* Repo link (red) */
     .repo-link{display:inline-block;margin-top:12px;color:#ff5252;font-weight:700;text-decoration:none}
     .repo-link:hover{color:#ff7b7b;text-decoration:underline}
 
@@ -59,18 +72,38 @@
     .skill-category{background:rgba(255,255,255,.05);border-radius:15px;padding:25px;border:1px solid rgba(255,255,255,.1)}
     .skill-category h3{color:#0088ff;margin-bottom:14px}
 
+    /* Repos section */
+    .repo-card{background:rgba(255,255,255,.05);border-radius:20px;padding:22px;border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(10px);transition:transform .2s ease,background .2s ease}
+    .repo-card:hover{transform:translateY(-6px);background:rgba(255,255,255,.08)}
+    .topic-badge{background:rgba(0,255,136,.18);color:#00ff88;border:1px solid rgba(0,255,136,.28);padding:3px 10px;border-radius:999px;font-size:.8rem}
+
+    /* Fade-in */
+    .fade-in{opacity:0;transform:translateY(30px);transition:all .6s ease}
+    .fade-in.visible{opacity:1;transform:translateY(0)}
+
     /* Mobile */
-    @media (max-width:768px){.projects-grid{grid-template-columns:1fr}}
+    @media (max-width:768px){
+      .nav-links{display:none}
+      .about-content{grid-template-columns:1fr;text-align:center}
+      .projects-grid{grid-template-columns:1fr}
+      .section h2{font-size:2rem}
+      .hero h1{font-size:3rem}
+    }
   </style>
 </head>
 <body>
+  <div class="cursor"></div>
+
   <nav id="navbar">
     <div class="nav-container">
       <div class="logo">SC</div>
       <ul class="nav-links">
         <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#repos">Repositories</a></li>
         <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -80,56 +113,82 @@
     <div class="hero-content">
       <h1>Sai Sathwik Chava</h1>
       <p>Full-Stack Developer & ML Engineer</p>
-      <a href="#projects" class="cta-button">Explore My Work</a>
+      <a href="#about" class="cta-button">Explore My Work</a>
     </div>
   </section>
 
-  <!-- Featured Projects -->
-  <section id="projects" class="section">
+  <section id="about" class="section fade-in">
+    <h2>About Me</h2>
+    <div class="about-content">
+      <img src="Sathwik_Pic.png" alt="Sathwik" style="width:400px;height:500px;border-radius:20px;object-fit:cover">
+      <div class="about-text">
+        <h3>Full-Stack & AI/ML Developer & Problem Solver</h3>
+        <p>I’m a Full-Stack and AI/ML Developer with a passion for creating innovative, scalable, and user-centric applications. I hold a Bachelor’s degree in Computer Science from Manipal University Jaipur and am currently pursuing a Master’s in Computer and Information Sciences at the University of Florida.</p>
+        <p>Experience: Software Developer Intern at Irusu Technologies (React, Spring) and ML Intern at Wicktronix (CNNs, dataset curation). Strong in Java, Spring, React, Python, ML/NLP.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section fade-in">
     <h2>Featured Projects</h2>
     <div class="projects-grid">
       <div class="project-card">
         <h3>Monkeypox Disease Detection</h3>
         <p>Architected CNN models for high-precision medical image recognition, achieving 99% accuracy on 10,000+ images. Reduced diagnosis time from 15 to 12 minutes and accelerated disease identification by 20%.</p>
         <div class="tech-tags">
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">OpenCV</span>
-          <span class="tech-tag">CNN</span>
-          <span class="tech-tag">sklearn</span>
+          <span class="tech-tag">Python</span><span class="tech-tag">OpenCV</span>
+          <span class="tech-tag">CNN</span><span class="tech-tag">sklearn</span>
         </div>
-        <a class="repo-link" target="_blank" href="https://github.com/Sathwikchava18/Monkeypox-Disease-Detection">Repository Link</a>
+        <a class="repo-link" href="https://github.com/Sathwikchava18/Monkeypox-Disease-Detection" target="_blank" rel="noopener">Repository Link</a>
       </div>
 
       <div class="project-card">
         <h3>Codebase Q&A Assistant</h3>
         <p>Engineered a RAG-powered assistant for querying large code repositories. Enhanced retrieval precision by 33% and reduced developer onboarding time by 40%. Handles 100+ queries daily with &lt;2s latency.</p>
         <div class="tech-tags">
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">Llama-2</span>
-          <span class="tech-tag">FAISS</span>
-          <span class="tech-tag">LangChain</span>
+          <span class="tech-tag">Python</span><span class="tech-tag">Llama-2</span>
+          <span class="tech-tag">FAISS</span><span class="tech-tag">LangChain</span>
           <span class="tech-tag">Streamlit</span>
         </div>
-        <a class="repo-link" target="_blank" href="https://github.com/Sathwikchava18/Codebase-QA-Assistant">Repository Link</a>
+        <a class="repo-link" href="https://github.com/Sathwikchava18/Codebase-QA-Assistant" target="_blank" rel="noopener">Repository Link</a>
       </div>
 
       <div class="project-card">
         <h3>E-commerce Recommendation Chatbot</h3>
         <p>Built an AI shopping assistant with semantic search over 50,000+ products. Improved conversion rates by 22% and engagement time by 35% through personalized recommendations using vector embeddings.</p>
         <div class="tech-tags">
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">Next.js</span>
-          <span class="tech-tag">FastAPI</span>
-          <span class="tech-tag">Pinecone</span>
+          <span class="tech-tag">Python</span><span class="tech-tag">Next.js</span>
+          <span class="tech-tag">FastAPI</span><span class="tech-tag">Pinecone</span>
           <span class="tech-tag">AWS</span>
         </div>
-        <a class="repo-link" target="_blank" href="https://github.com/Sathwikchava18/Ecommerce-Recommendation-Chatbot">Repository Link</a>
+        <a class="repo-link" href="https://github.com/Sathwikchava18/Ecommerce-Recommendation-Chatbot" target="_blank" rel="noopener">Repository Link</a>
       </div>
     </div>
   </section>
 
-  <!-- Skills -->
-  <section id="skills" class="section">
+  <!-- Optional: Auto GitHub repositories list -->
+  <section id="repos" class="section fade-in">
+    <h2>Repositories</h2>
+    <div style="max-width:1200px;margin:0 auto;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center">
+      <input id="repo-search" type="search" placeholder="Search repos…" aria-label="Search repositories"
+             style="flex:1;min-width:260px;max-width:420px;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#fff;outline:none">
+      <select id="repo-language" style="padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#fff;min-width:180px">
+        <option value="">All languages</option>
+      </select>
+      <select id="repo-sort" style="padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#fff;min-width:200px">
+        <option value="updated">Recently updated</option>
+        <option value="stars">Most stars</option>
+        <option value="name">Name (A→Z)</option>
+      </select>
+    </div>
+    <div id="repo-grid" class="projects-grid" style="margin-top:30px"></div>
+    <div style="display:flex;justify-content:center;gap:12px;margin-top:24px">
+      <button id="repo-prev" class="cta-button" disabled>Prev</button>
+      <button id="repo-next" class="cta-button" disabled>Next</button>
+    </div>
+  </section>
+
+  <section id="skills" class="section fade-in">
     <h2>Technical Skills</h2>
     <div class="skills-grid">
       <div class="skill-category">
@@ -165,6 +224,153 @@
       </div>
     </div>
   </section>
+
+  <section id="contact" class="section fade-in">
+    <h2>Let's Connect</h2>
+    <div style="text-align:center;max-width:700px;margin:0 auto">
+      <p>Open to internships and collaborations. Feel free to reach out!</p>
+      <div class="tech-tags" style="justify-content:center;margin-top:20px">
+        <a href="mailto:sathwik.ch79@gmail.com" class="skill-item" style="text-decoration:none">📧 Email</a>
+        <a href="tel:+13522223783" class="skill-item" style="text-decoration:none">📱 Phone</a>
+        <a href="https://www.linkedin.com/in/saisathwikchava/" target="_blank" rel="noopener" class="skill-item" style="text-decoration:none">💼 LinkedIn</a>
+        <a href="https://github.com/Sathwikchava18" target="_blank" rel="noopener" class="skill-item" style="text-decoration:none">🐙 GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    /* ===== Custom cursor + trails ===== */
+    const cursor=document.querySelector('.cursor');const trails=[];const trailCount=5;
+    for(let i=0;i<trailCount;i++){const t=document.createElement('div');t.className='cursor-trail';t.style.opacity=(1-i/trailCount)*0.5;document.body.appendChild(t);trails.push({element:t,x:0,y:0})}
+    let mouseX=0,mouseY=0;
+    document.addEventListener('mousemove',e=>{mouseX=e.clientX;mouseY=e.clientY;cursor.style.left=mouseX-10+'px';cursor.style.top=mouseY-10+'px'});
+    (function animateTrails(){let px=mouseX,py=mouseY;trails.forEach((tr,i)=>{tr.x+=(px-tr.x)*(0.2+i*0.1);tr.y+=(py-tr.y)*(0.2+i*0.1);tr.element.style.left=tr.x-2+'px';tr.element.style.top=tr.y-2+'px';px=tr.x;py=tr.y});requestAnimationFrame(animateTrails)})();
+
+    // hover scale for interactive cards
+    document.querySelectorAll('.project-card,.skill-category').forEach(card=>{
+      card.addEventListener('mouseenter',()=>cursor.style.transform='scale(1.5)');
+      card.addEventListener('mouseleave',()=>cursor.style.transform='scale(1)');
+    });
+
+    /* ===== Navbar scroll effect ===== */
+    const navbar=document.getElementById('navbar');
+    window.addEventListener('scroll',()=>{if(window.scrollY>100)navbar.classList.add('scrolled');else navbar.classList.remove('scrolled')});
+
+    /* ===== Smooth scroll ===== */
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        e.preventDefault();
+        const t=document.querySelector(a.getAttribute('href'));
+        if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
+      });
+    });
+
+    /* ===== Fade-in on scroll ===== */
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{ if(entry.isIntersecting) entry.target.classList.add('visible'); });
+    },{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+    document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+    /* ===== Parallax hero background ===== */
+    window.addEventListener('scroll',()=>{const scrolled=window.pageYOffset;const bg=document.querySelector('.hero-bg');if(bg) bg.style.transform=`translateY(${scrolled*0.5}px)`});
+
+    /* ===== Floating particles ===== */
+    function createParticles(){
+      const particle=document.createElement('div');
+      const size=2+Math.random()*2;
+      particle.style.cssText=`position:fixed;width:${size}px;height:${size}px;background:rgba(0,255,136,0.6);border-radius:50%;pointer-events:none;z-index:1;left:${Math.random()*100}vw;top:${Math.random()*100}vh;opacity:0;`;
+      document.body.appendChild(particle);
+      const dx=(Math.random()*200-100), dur=5000+Math.random()*7000;
+      particle.animate([
+        {transform:`translate(0, 0)`,opacity:0},
+        {transform:`translate(${dx/2}px, -50vh)`,opacity:1,offset:0.2},
+        {transform:`translate(${dx}px, -100vh)`,opacity:0}
+      ],{duration:dur,iterations:1,easing:'linear'}).onfinish=()=>particle.remove();
+    }
+    setInterval(()=>{for(let i=0;i<8;i++) createParticles();},2000);
+
+    /* ===== Typewriter on name ===== */
+    function typeWriter(el,text,speed=80){let i=0;el.textContent='';(function t(){if(i<text.length){el.textContent+=text.charAt(i++);setTimeout(t,speed)}})()}
+    window.addEventListener('load',()=>{const el=document.querySelector('.hero h1');typeWriter(el,el.textContent,100)});
+
+    /* ===== GitHub Repositories (optional list) ===== */
+    const GITHUB_USERNAME="Sathwikchava18";
+    let allRepos=[],filteredRepos=[],page=1;const pageSize=9;
+    const repoGrid=document.getElementById('repo-grid');
+    const searchInput=document.getElementById('repo-search');
+    const languageSelect=document.getElementById('repo-language');
+    const sortSelect=document.getElementById('repo-sort');
+    const prevBtn=document.getElementById('repo-prev');
+    const nextBtn=document.getElementById('repo-next');
+
+    function renderRepoCard(r){
+      const updated=new Date(r.updated_at).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'2-digit'});
+      const topics=(r.topics||[]).slice(0,6).map(t=>`<span class="topic-badge">${t}</span>`).join(' ');
+      const live=r.homepage?`<a href="${r.homepage}" target="_blank" rel="noopener">Live Demo ↗</a>`:'';
+      return `<div class="repo-card">
+        <h3 style="color:#00ff88;margin-bottom:8px;font-size:1.2rem">${r.name}</h3>
+        <p style="color:rgba(255,255,255,.85);margin-bottom:14px">${r.description||'No description provided.'}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:10px;color:rgba(255,255,255,.8)">
+          <span>★ ${r.stargazers_count}</span><span>•</span><span>${r.language||'Other'}</span><span>•</span><span>Updated ${updated}</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">${topics}</div>
+        <div style="display:flex;gap:12px"><a href="${r.html_url}" target="_blank" rel="noopener">GitHub ↗</a> ${live}</div>
+      </div>`;
+    }
+
+    function hydrateLanguages(){
+      if(!languageSelect) return;
+      const langs=[...new Set(allRepos.map(r=>r.language).filter(Boolean))].sort();
+      langs.forEach(l=>{const o=document.createElement('option');o.value=l;o.textContent=l;languageSelect.appendChild(o)});
+    }
+
+    function applyFiltersAndRender(){
+      if(!repoGrid) return;
+      const q=(searchInput?.value||'').toLowerCase(), lang=languageSelect?.value||'', sort=sortSelect?.value||'updated';
+      filteredRepos=allRepos.filter(r=>{
+        const text=(r.name+' '+(r.description||'')+' '+(r.topics||[]).join(' ')).toLowerCase();
+        return (!q||text.includes(q)) && (!lang||r.language===lang);
+      });
+      if(sort==='stars') filteredRepos.sort((a,b)=>b.stargazers_count-a.stargazers_count);
+      else if(sort==='name') filteredRepos.sort((a,b)=>a.name.localeCompare(b.name));
+      else filteredRepos.sort((a,b)=>new Date(b.updated_at)-new Date(a.updated_at));
+      page=1; renderPage();
+    }
+
+    function renderPage(){
+      if(!repoGrid) return;
+      const start=(page-1)*pageSize;
+      repoGrid.innerHTML=filteredRepos.slice(start,start+pageSize).map(renderRepoCard).join('');
+      if(prevBtn) prevBtn.disabled=page===1;
+      if(nextBtn) nextBtn.disabled=start+pageSize>=filteredRepos.length;
+    }
+
+    prevBtn?.addEventListener('click',()=>{page=Math.max(1,page-1);renderPage()});
+    nextBtn?.addEventListener('click',()=>{page=page+1;renderPage()});
+    searchInput?.addEventListener('input',applyFiltersAndRender);
+    languageSelect?.addEventListener('change',applyFiltersAndRender);
+    sortSelect?.addEventListener('change',applyFiltersAndRender);
+
+    (async function fetchRepos(){
+      if(!repoGrid) return; // if you removed the Repos section
+      try{
+        const res=await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`,{
+          headers:{Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"}
+        });
+        if(!res.ok) throw new Error(`GitHub API ${res.status}`);
+        const data=await res.json();
+        allRepos=data.filter(r=>!r.fork && !r.archived).map(r=>({
+          id:r.id,name:r.name,full_name:r.full_name,description:r.description||'',
+          html_url:r.html_url,homepage:r.homepage||'',language:r.language||'Other',
+          stargazers_count:r.stargazers_count||0,updated_at:r.updated_at,topics:r.topics||[]
+        }));
+        hydrateLanguages(); applyFiltersAndRender();
+      }catch(err){
+        console.error(err);
+        repoGrid.innerHTML=`<p style="text-align:center;color:rgba(255,255,255,.8)">Couldn’t load repositories right now.</p>`;
+      }
+    })();
+  </script>
 </body>
 </html>
 
